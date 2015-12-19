@@ -7,5 +7,6 @@ public enum HTMLRequestType {
     GET,
     POST,
     PUT,
-    DELETE
+    DELETE,
+    UNKNOWN
 }

@@ -15,7 +15,7 @@ public class FileReader {
     public String ReadWholeFile(String fileName) throws IOException {
         String fileContent;
 
-        FileInputStream inputStream = new FileInputStream(folderLocation+"index.html");
+        FileInputStream inputStream = new FileInputStream(folderLocation+fileName);
         try
         {
             fileContent = IOUtils.toString(inputStream);

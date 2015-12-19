@@ -18,9 +18,29 @@ public class HTMLProcessorImpl implements HTMLProcessor {
 
     public HTMLResponse HandleHTMLRequest(HTMLRequest request) {
 
+        String fileName = null;
+        if("/".equals(request.GetRequestedURL()))
+        {
+            fileName = "index.html";
+        }
+        else
+        {
+            //remove the preceding /
+            fileName = request.GetRequestedURL();
+            fileName = fileName.substring(1, fileName.length());
+
+            //remove trailing .html if any
+            if (fileName.endsWith(".html"))
+            {
+                fileName = fileName.substring(0,fileName.length()-5);
+            }
+        }
+
+        System.out.println(fileName);
+
         String fileContent = null;
         try {
-            fileContent = fileReader.ReadWholeFile("index.html");
+            fileContent = fileReader.ReadWholeFile(fileName+".html");
         } catch (IOException e) {
             e.printStackTrace();
         }
