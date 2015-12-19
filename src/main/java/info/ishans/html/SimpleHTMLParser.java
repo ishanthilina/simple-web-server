@@ -23,7 +23,7 @@ public class SimpleHTMLParser implements HTMLParser {
         System.out.println(input);
 
         //check for the correct pattern -Ex : GET / HTTP/1.1
-        Pattern pattern = Pattern.compile("^[A-Z]{3,4} [\\/][A-Za-z0-9]* HTTP[\\/]\\d\\.\\d");
+        Pattern pattern = Pattern.compile("^[A-Z]{3,4} [\\/]([A-Za-z0-9]*|[A-Za-z0-9]*.html) HTTP[\\/]\\d\\.\\d");
         if (!pattern.matcher(input).matches()) {
             System.out.println("Match fail");
             response = new HTMLResponseImpl(400, "Bad request");
@@ -73,6 +73,9 @@ public class SimpleHTMLParser implements HTMLParser {
         {
             case 200:
                 responseBuilder.append("OK");
+                break;
+            case 404:
+                responseBuilder.append("NotFound");
                 break;
             default:
                 responseBuilder.append("UnknownStatus");

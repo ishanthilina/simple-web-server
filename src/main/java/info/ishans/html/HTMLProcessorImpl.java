@@ -21,7 +21,7 @@ public class HTMLProcessorImpl implements HTMLProcessor {
         String fileName = null;
         if("/".equals(request.GetRequestedURL()))
         {
-            fileName = "index.html";
+            fileName = "index";
         }
         else
         {
@@ -43,6 +43,14 @@ public class HTMLProcessorImpl implements HTMLProcessor {
             fileContent = fileReader.ReadWholeFile(fileName+".html");
         } catch (IOException e) {
             e.printStackTrace();
+            try {
+                fileContent = fileReader.ReadWholeFile("404.html");
+                return new HTMLResponseImpl(404,fileContent);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+                return new HTMLResponseImpl(404,"File Not found");
+            }
+
         }
 
 
